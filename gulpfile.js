@@ -15,7 +15,9 @@ gulp.task("style", function () {
 });
 
 var htmlDir = "./src/views";
-var htmlFiles = [htmlDir + "/*.html"];
+var htmlFiles = htmlDir + "/*.html";
+var jadeFiles = htmlDir + "/*.jade";
+var viewFiles = [htmlFiles, jadeFiles];
 
 gulp.task("inject", function () {
     var wiredep = require("wiredep").stream;
@@ -32,7 +34,7 @@ gulp.task("inject", function () {
         ignorePath: 'public'
     };
 
-    return gulp.src(htmlFiles)
+    return gulp.src(viewFiles)
         .pipe(wiredep(options))
         .pipe(inject(injectSrc, injectOptions))
         .pipe(gulp.dest(htmlDir));
