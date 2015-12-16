@@ -17,21 +17,21 @@ app.set("views", './src/views');
 
 app.set("view engine", 'ejs');
 
-app.get("/", function(req, res){
-    res.render("index", {title: "Hello from render", list: ['a', 'b']});
-});
+var menuItems = [{link:"/books", text: "Books"}, {link:"/authors", text:"Authors"}];
+
+var BookRouter = require("./src/routes/bookRoutes");
+
+app.use("/books", BookRouter({menuItems: menuItems}));
 
 app.get("/home", function(req, res){
-    res.render("home", {title: "Hello from render", list: ['my item 1', 'my item 2']});
-});
-
-app.get("/books", function(req, res){
-    res.send("Hello books!");
+    res.render("home", {title: "Hello from render", menuItems: menuItems});
 });
 
 app.listen(port, function(err){
     console.log("Running server on port " + port);
 });
+
+
 
 
 
