@@ -14,7 +14,9 @@
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
     "handlebars": "^4.0.5",
-    "jade": "^1.11.0"
+    "jade": "^1.11.0",
+    "kerberos": "0.0.17",
+    "mongodb": "^2.0.52"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

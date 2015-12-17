@@ -20,8 +20,10 @@ app.set("view engine", 'ejs');
 var menuItems = [{link:"/books", text: "Books"}, {link:"/authors", text:"Authors"}];
 
 var BookRouter = require("./src/routes/bookRoutes");
+var AdminRouter = require("./src/routes/adminRoutes");
 
 app.use("/books", BookRouter({menuItems: menuItems}));
+app.use("/admin", AdminRouter({menuItems: menuItems}));
 
 app.get("/home", function(req, res){
     res.render("home", {title: "Hello from render", menuItems: menuItems});

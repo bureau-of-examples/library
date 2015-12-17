@@ -2,32 +2,7 @@
 
 var express = require('express');
 
-var books = [
-    {
-        title:"War and Peace",
-        genre: "Historical Fiction",
-        author: "Lev Nikolayevich Tolstoy",
-        read: false
-    },
-    {
-        title: "Les Miserables",
-        genre: "Historial Fiction",
-        author: "Victor Hugo",
-        read: false
-    },
-    {
-        title: "The Time Machine",
-        genre: "Science Fiction",
-        author: "H. G. Wells",
-        read: false
-    },
-    {
-        title: "A journey into the Center of the Earth",
-        genre: "Science Fiction",
-        author: "Jules Verne",
-        read: false
-    }
-];
+var books = require('../modules/bookCollection');
 
 var BookRouter = function(args){
     var bookRouter = express.Router();
