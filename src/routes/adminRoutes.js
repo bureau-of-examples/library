@@ -15,8 +15,11 @@ var router = function(){
             mongodb.connect(url, function(err, db){
                 var collection = db.collection('books');
                 collection.insertMany(books, function(err, results){
-                    res.send(results);
                     db.close();
+                    if(!results){
+                        res.json(err);
+                    }
+                    res.redirect('/books');
                 });
             });
         });

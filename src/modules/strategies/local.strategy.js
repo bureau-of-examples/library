@@ -10,7 +10,7 @@ module.exports = function(){
         usernameField: 'username',
         passwordField: 'password'
     },
-    function(username, password, done){
+    function(username, password, done){ //login handler
         console.log("Looking up username: " + username);
         mongodb.connect(url, function(err, db){
             var collection = db.collection('users');

@@ -2,8 +2,9 @@ var mongodb = require('mongodb').MongoClient;
 var objectId = require('mongodb').ObjectID;
 var url = 'mongodb://localhost:27017/libraryApp';
 var createViewModel = require('../modules/createViewModel');
+var bookService = require('../services/goodReadsService');
 
-var bookController = function(bookService){
+var bookController = function(){
 
     var getIndex = function(req, res){
         mongodb.connect(url, function(err, db){
@@ -23,11 +24,15 @@ var bookController = function(bookService){
         mongodb.connect(url, function(err, db){
             var collection = db.collection('books');
             collection.findOne({_id: id}, function(err, book){
-                var model = createViewModel();
-                model.title = "Book Details";
-                model.book = book;
-                res.render("book", model);
-                db.close();
+                bookService.getBookById(book.referenceId, function(err, bookDetails){
+                    db.close();
+                    var model = createViewModel();
+                    model.title = "Book Details";
+                    model.book = book;
+                    model.bookDetails = bookDetails;
+                    res.render("book", model);
+
+                });
             });
         });
     };

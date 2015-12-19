@@ -16,6 +16,7 @@ authRouter.route('/signUp')
             };
 
             collection.insert(user, function(err, results){
+                db.close();
                 req.login(results.ops[0], function () {
                     res.redirect('/auth/profile');
                 });
