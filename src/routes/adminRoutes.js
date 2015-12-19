@@ -7,7 +7,7 @@ var mongodb = require('mongodb').MongoClient;
 
 var books = require('../modules/bookCollection');
 
-var router = function(menuItems){
+var router = function(){
 
     adminRouter.route("/books/add")
         .get(function(req, res){

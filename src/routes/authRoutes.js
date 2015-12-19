@@ -3,6 +3,7 @@ var authRouter = express.Router();
 var passport = require('passport');
 var mongodb = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/libraryApp';
+var createViewModel = require('../modules/createViewModel');
 
 authRouter.route('/signUp')
     .post(function (req, res) {
@@ -31,7 +32,11 @@ authRouter.route('/profile')
         }
     })
     .get(function (req, res) {
-        res.json(req.user);
+
+        var model = createViewModel();
+        model.title = 'Your profile';
+        model.username = req.user.username;
+        res.render('profile', model);
     });
 
 authRouter.route('/signIn')

@@ -19,18 +19,20 @@ require('./src/modules/passport')(app);
 app.set("views", './src/views');
 app.set("view engine", 'ejs');
 
-var menuItems = [{link: "/books", text: "Books"}, {link: "/authors", text: "Authors"}];
-
 var BookRouter = require("./src/routes/bookRoutes");
 var AdminRouter = require("./src/routes/adminRoutes");
 var AuthRouter = require("./src/routes/authRoutes");
 
-app.use("/books", BookRouter({menuItems: menuItems}));
-app.use("/admin", AdminRouter({menuItems: menuItems}));
+app.use("/books", BookRouter());
+app.use("/admin", AdminRouter());
 app.use("/auth", AuthRouter());
 
+var createViewModel = require('./src/modules/createViewModel');
+
 app.get("/", function (req, res) {
-    res.render("home", {title: "Hello from render", menuItems: menuItems});
+    var model = createViewModel();
+    model.title = "Hello from render";
+    res.render("home", model);
 });
 
 app.listen(port, function (err) {
